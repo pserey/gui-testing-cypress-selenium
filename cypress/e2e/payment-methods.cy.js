@@ -6,7 +6,7 @@ describe('payment methods', () => {
     cy.get('.primary').click();
   });
   // Remove .only and implement others test cases!
-  it.only('change cash on delivery position', () => {
+  it('change cash on delivery position', async () => {
     // Click in payment methods in side menu
     cy.clickInFirst('a[href="/admin/payment-methods/"]');
     // Type in value input to search for specify payment method
@@ -23,12 +23,46 @@ describe('payment methods', () => {
     // Assert that payment method has been updated
     cy.get('body').should('contain', 'Payment method has been successfully updated.');
   });
+
   it('test case 2', () => {
-    // Implement your test case 2 code here
+    cy.clickInFirst('a[href="/admin/payment-methods/"]');
+
+    cy.get('[id="criteria_search_value"]').type('bank_transfer');
+
+    cy.get('*[class^="ui blue labeled icon button"]').click();
+    cy.get('*[class^="ui labeled icon button "]').click();
+    
+    cy.get('[id="sylius_payment_method_enabled"]').click({force:true});
+    cy.get('[id="sylius_save_changes_button"]').scrollIntoView().click();
+
+    cy.get('body').should('contain', 'Payment method has been successfully updated.');
   });
+  
   it('test case 3', () => {
-    // Implement your test case 3 code here
+    cy.clickInFirst('a[href="/admin/payment-methods/"]');
+    
+    cy.get('*[class^="ui labeled icon top right floating dropdown button primary link"]').click();
+    
+    cy.get('[id="offline"]').click()
+
+    cy.get('[id="sylius_payment_method_code"]').type('credit_card')
+    cy.get('[id="sylius_payment_method_position"]').type('2')
+    cy.get('[id="sylius_payment_method_translations_en_US_name"]').type('Credit Card')
+
+    cy.get('*[class^="ui labeled icon primary button"]').last().click();
+
+    cy.get('body').should('contain', 'Payment method has been successfully created.');
   });
 
-  // Implement the remaining test cases in a similar manner
+  it('test case 4', () => {
+    cy.clickInFirst('a[href="/admin/payment-methods/"]');
+
+    cy.get('[id="criteria_search_value"]').type('credit_card');
+    cy.get('*[class^="ui blue labeled icon button"]').click();
+    
+    cy.get('*[class^="ui red labeled icon button"]').last().click();
+    cy.get('[id="confirmation-button"]').click();
+    cy.get('body').should('contain', 'Payment method has been successfully deleted.');
+  });
+
 });
