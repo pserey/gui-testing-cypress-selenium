@@ -23,7 +23,7 @@ describe('payment methods', () => {
   });
 
   // Remove .only and implement others test cases!
-  it('tc1', async () => {
+  it('change cash on delivery position', async () => {
     // Click in payment methods in side menu
     await driver.findElement(By.linkText('Payment methods')).click();
 
@@ -48,7 +48,7 @@ describe('payment methods', () => {
     assert(bodyText.includes('Payment method has been successfully updated.'));
   });
 
-  it('tc2', async () => {
+  it('change enable state of Bank Transfer', async () => {
     await driver.findElement(By.linkText('Payment methods')).click();
     await driver.findElement(By.id('criteria_search_value')).sendKeys('bank_transfer')
     await driver.findElement(By.css('*[class^="ui blue labeled icon button"]')).click();
@@ -65,7 +65,7 @@ describe('payment methods', () => {
     assert(bodyText.includes('Payment method has been successfully updated.'));
   });
 
-  it('tc3', async () => {
+  it('create offline credit card payment method', async () => {
     await driver.findElement(By.linkText('Payment methods')).click();
 
     await driver.findElement(By.className('ui labeled icon top right floating dropdown button primary link')).click();
@@ -82,7 +82,7 @@ describe('payment methods', () => {
   });
 
 
-  it('tc4', async () => {
+  it('delete last credit card payment method', async () => {
     await driver.findElement(By.linkText('Payment methods')).click();
 
     // search for recently created element
@@ -98,7 +98,7 @@ describe('payment methods', () => {
     assert(bodyText.includes('Payment method has been successfully deleted.'));
   });
 
-  it('tc5', async () => {
+  it('edit and verify bank transfer name change', async () => {
     await driver.findElement(By.linkText('Payment methods')).click();
     await driver.findElement(By.id('criteria_search_value')).sendKeys('bank_transfer')
     await driver.findElement(By.css('*[class^="ui blue labeled icon button"]')).click();
@@ -121,7 +121,7 @@ describe('payment methods', () => {
     assert(bodyText.includes('New Bank Transfer'));
   });
 
-  it('tc6', async () => {
+  it('create international bank transfer and verify', async () => {
     await driver.findElement(By.linkText('Payment methods')).click();
 
     await driver.findElement(By.className('ui labeled icon top right floating dropdown button primary link')).click();
@@ -143,7 +143,7 @@ describe('payment methods', () => {
     assert(bodyText.includes('int_bank_transfer'));
   });
 
-  it('tc7', async () => {
+  it('create and verify stripe checkout credit card', async () => {
     await driver.findElement(By.linkText('Payment methods')).click();
 
     await driver.findElement(By.className('ui labeled icon top right floating dropdown button primary link')).click();
@@ -171,7 +171,7 @@ describe('payment methods', () => {
     assert(bodyText.includes('credit_card'));
   });
 
-  it('tc8', async () => {
+  it('create and verify paypal express checkout', async () => {
     await driver.findElement(By.linkText('Payment methods')).click();
 
     await driver.findElement(By.className('ui labeled icon top right floating dropdown button primary link')).click();
@@ -195,7 +195,7 @@ describe('payment methods', () => {
     assert(bodyText.includes('pay_pal_checkout'));
   });
 
-  it('tc9', async () => {
+  it('create german international bank card', async () => {
     await driver.findElement(By.linkText('Payment methods')).click();
 
     await driver.findElement(By.className('ui labeled icon top right floating dropdown button primary link')).click();
@@ -215,7 +215,7 @@ describe('payment methods', () => {
     assert(bodyText.includes('Payment method has been successfully created.'));
   });
 
-  it('tc10', async () => {
+  it('assert card presence and absence', async () => {
     await driver.findElement(By.linkText('Payment methods')).click();
     await driver.findElement(By.id('criteria_search_value')).sendKeys('card');
     await driver.findElement(By.css('*[class^="ui blue labeled icon button"]')).click();
